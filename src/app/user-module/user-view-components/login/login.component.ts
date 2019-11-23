@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +17,21 @@ export class LoginComponent implements OnInit {
     email: ['',Validators.compose([Validators.email,Validators.required])],
     password: ['',Validators.compose([Validators.required,Validators.minLength(8)])],
   });
+  submitted:boolean = false;
   onSubmit() {
-    this.router.navigate(['user/home'])
+    this.submitted=true;
+    if(!this.loginForm.invalid)
+      this.router.navigate(['user/home'])
   }
+  signUp(){
+    this.router.navigate(['user/signup'])
+  }
+  get email() {
+    return this.loginForm.get('email');
+  }
+  get password() {
+    return this.loginForm.get('password');
+  }
+  
 
 }

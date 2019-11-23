@@ -7,11 +7,11 @@ import { Routes, RouterModule } from '@angular/router';
 export const routes: Routes = [
     {
       path: '',
-      redirectTo: 'user',
+      redirectTo: '',
       pathMatch: 'full',
     },
     {
-      path: 'user',
+      path: '',
       loadChildren: () => import('../user-module/user-module.module').then(module => module.UserModule)
     }
 ];

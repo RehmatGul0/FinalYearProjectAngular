@@ -4,26 +4,31 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './user-view-components/home/home.component';
 import { UploadDataComponent } from './user-view-components/upload-data/upload-data.component';
 import { LoginComponent } from './user-view-components/login/login.component';
+import { RegisterComponent } from './user-view-components/register/register.component';
 
 
 const routes: Routes = [
       {
         path: '',
-        redirectTo: 'login',
+        redirectTo: 'user/signin',
         pathMatch: 'full',
       },
       {
-        path: 'login',
+        path: 'user/signin',
         component: LoginComponent
+      },
+      {
+        path: 'user/signup',
+        component: RegisterComponent
       }
       ,
       {
-        path: 'uploadData',
+        path: 'user/uploadData',
         component:UploadDataComponent
       }
       ,
       {
-        path: 'home',
+        path: 'user/home',
         component:HomeComponent
       }
 ];

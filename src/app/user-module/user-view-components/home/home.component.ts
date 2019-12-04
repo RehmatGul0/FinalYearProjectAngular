@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { UploadDataComponent } from './../upload-data/upload-data.component';
+import { Component, OnInit , ViewChild } from '@angular/core';
 import {Router} from '@angular/router';
 
 
@@ -8,12 +9,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
   constructor(private router: Router) { }
-
+  isFileSelected : boolean;
+  uploadDataClicked:boolean;
   ngOnInit() {
+    this.uploadDataClicked=false;
+    this.isFileSelected=false;
+  }
+  fileSelected(isFileSelected:boolean) {
+    this.uploadDataClicked=true;
+    this.isFileSelected=isFileSelected;
   }
   uploadData(){
-    this.router.navigate(['user/uploadData']);
+    this.uploadDataClicked=true;
+    if(this.isFileSelected)
+      alert("success");
   }
 }

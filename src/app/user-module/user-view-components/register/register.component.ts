@@ -24,6 +24,9 @@ export class RegisterComponent implements OnInit {
     if(!this.signupForm.invalid)
       this.router.navigate(['user/signin'])
   }
+  signIn(){
+    this.router.navigate(['user/signin'])
+  }
   get email() {
     return this.signupForm.get('email');
   }

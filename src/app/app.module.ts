@@ -8,6 +8,7 @@ import { UserModule } from './user-module/user-module.module';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared-components/navbar/navbar.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NavbarComponent } from './shared-components/navbar/navbar.component';
     NgbModule,
     BrowserModule,
     UserModule,
-    RoutingModule
+    RoutingModule,
+    NoopAnimationsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   }
   signupForm:FormGroup = this.fb.group({
     email: ['',Validators.compose([Validators.email,Validators.required])],
+    name: ['',Validators.compose([Validators.requiredTrue])],
     password: ['',Validators.compose([Validators.required,Validators.minLength(8)])],
     confirmPassword: ['',Validators.compose([Validators.required,Validators.minLength(8)])]
   });
@@ -27,11 +28,13 @@ export class RegisterComponent implements OnInit {
   signIn(){
     this.router.navigate(['user/signin'])
   }
+  get name(){
+    return this.signupForm.get('name');
+  }
   get email() {
     return this.signupForm.get('email');
   }
   get password() {
     return this.signupForm.get('password');
   }
-
 }

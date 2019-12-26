@@ -1,0 +1,51 @@
+<ngx-spinner></ngx-spinner>
+<div class="card container">
+  <article class="card-body">
+    <h4 class="card-title text-center">Add Question</h4>
+    <hr>
+    <form [formGroup]="questionForm">
+      <div class="form-group row">
+        <label for="question" class="col-sm-3 col-form-label">Question</label>
+        <div class="col-sm-9">
+          <input id="modelFile" class="form-control-plaintext" formControlName="question" class="form-control"
+            placeholder="Enter your question here" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="answer" class="col-sm-3 col-form-label">Answer Path</label>
+        <div class="col-sm-9">
+          <input id="answer" class="form-control-plaintext" formControlName="answerPath" class="form-control"
+            placeholder="Enter your question here" type="text">
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <label for="domain" class="col-sm-3 col-form-label">Domain</label>
+        <div class="col-sm-9">
+          <select class="custom-select" id="domain" formControlName="domain">
+            <option value="" selected>Click to select domain</option>
+            <option *ngFor="let domain of domains" value={{domain.index}}> {{domain._name}}
+            </option>
+          </select>
+        </div>
+      </div> <!-- form-group// -->
+
+      <div class="form-group row">
+        <label for="modelInfo" class="col-sm-3 col-form-label">Model info</label>
+        <div class="col-sm-9">
+          <select class="custom-select" id="modelInfo" formControlName="modelInfo">
+            <option value="" selected>Click to select model info</option>
+            <option *ngFor="let model of models" value={{model.index}}> {{model._algorithm._name}} {{model._features}}
+            </option>
+          </select>
+        </div>
+      </div> <!-- form-group// -->
+      
+      <div class="row">
+        <div class="form-group col-sm-9 offset-3">
+          <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block"> Submit </button>
+        </div> <!-- form-group// -->
+      </div>
+    </form>
+  </article>
+</div>

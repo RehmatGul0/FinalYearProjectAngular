@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class UploadDataComponent implements OnInit {
   constructor(private fb : FormBuilder) { 
   }
-  @Output() fileSelected = new EventEmitter<boolean>();
+  @Output() fileSelected = new EventEmitter<File>();
   uploadDataForm:FormGroup = this.fb.group({
     data: [null,Validators.compose([Validators.required])],
   });
@@ -18,7 +18,7 @@ export class UploadDataComponent implements OnInit {
   }
   handleFileInput(file: File) {
     if(file){
-      this.fileSelected.emit(true);
+      this.fileSelected.emit(file);
       this.selectFileText=file[0].name;
     }
   }

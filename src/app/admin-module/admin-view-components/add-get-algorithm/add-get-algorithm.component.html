@@ -1,0 +1,33 @@
+<ngx-spinner></ngx-spinner>
+<div class="card container">
+  <article class="card-body">
+    <h4 class="card-title text-center">Add Algorithm</h4>
+    <hr>
+    <form [formGroup]="algorithmForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="algorithmName" class="col-sm-2 col-form-label">Algorithm Name</label>
+        <div class="col-sm-10">
+          <input id="algorithmName" class="form-control-plaintext" formControlName="algorithmName" class="form-control"
+            placeholder="Enter algorithm name here.." type="text">
+          <div *ngIf="(algorithmName.dirty || algorithmName.touched || submitted)" class="invalid-feedback d-block">
+            <span *ngIf=" algorithmName.errors?.required">Algorithm name is required..</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-10 offset-2">
+          <button type="submit" class="btn btn-primary btn-block"> Add </button>
+        </div> <!-- form-group// -->
+      </div>
+    </form>
+  </article>
+  <article class="card-body">
+    <div class="row">
+      <div class="col-sm-9 offset-3">
+        <ag-grid-angular style="width: 100%%; height: 300px;" class="ag-theme-balham" [rowData]="rowData"
+          [columnDefs]="columnDefs" (gridReady)="onGridReady($event)">
+        </ag-grid-angular>
+      </div>
+    </div>
+  </article>
+</div>

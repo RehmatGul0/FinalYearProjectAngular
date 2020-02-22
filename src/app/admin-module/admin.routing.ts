@@ -9,32 +9,32 @@ import { HomeComponent } from './admin-view-components/home/home.component';
 
 const routes: Routes = [
   {
-    path: 'admin',
+    path: '',
     redirectTo: 'admin/signin',
     pathMatch: 'full',
   },
   {
-    path: 'admin/signin',
+    path: 'signin',
     component: LoginComponent
   },
   {
-    path: 'admin/home',
+    path: 'home',
     component: HomeComponent
   },
   {
-    path: 'admin/addModelInfo',
+    path: 'modelInfo',
     component: AddModelInfoComponent
   },
   {
-    path: 'admin/addQuestion',
+    path: 'question',
     component: AddQuestionComponent
   },
   {
-    path: 'admin/algorithm',
+    path: 'algorithm',
     component: AddGetAlgorithmComponent
   },
   {
-    path: 'admin/domain',
+    path: 'domain',
     component: AddGetDomainComponent
   },
   

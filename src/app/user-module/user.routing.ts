@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 
 import { HomeComponent } from './user-view-components/home/home.component';
 import { UploadDataComponent } from './user-view-components/upload-data/upload-data.component';
@@ -7,34 +6,28 @@ import { LoginComponent } from './user-view-components/login/login.component';
 import { RegisterComponent } from './user-view-components/register/register.component';
 
 
-const routes: Routes = [
+export const userRoutes: Routes = [
       {
         path: '',
-        redirectTo: 'user/signin',
+        redirectTo: 'signin',
         pathMatch: 'full',
       },
       {
-        path: 'user/signin',
+        path: 'signin',
         component: LoginComponent
       },
       {
-        path: 'user/signup',
+        path: 'signup',
         component: RegisterComponent
       }
       ,
       {
-        path: 'user/uploadData',
+        path: 'uploadData',
         component:UploadDataComponent
       }
       ,
       {
-        path: 'user/home',
+        path: 'home',
         component:HomeComponent
       }
 ];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
-})
-export class UserRoutingModule { }

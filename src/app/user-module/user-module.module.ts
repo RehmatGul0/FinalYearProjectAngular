@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {UserRoutingModule} from './user.routing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
@@ -26,7 +25,6 @@ import { QuestionService } from '../user-module/services/question/question.servi
     HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
-    UserRoutingModule
     ],
   providers:[DomainService,QuestionService]
 })

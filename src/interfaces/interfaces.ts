@@ -1,6 +1,11 @@
 export interface response<T>{
     result:T
 }
+export interface SignIn{
+    email:string,
+    name:string,
+    token:string
+}
 export interface GetDomain{
     _id:string,
     _name:string

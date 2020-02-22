@@ -1,21 +1,22 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { userRoutes } from '../user-module/user.routing';
 
 
 
 export const routes: Routes = [
     {
       path: '',
-      redirectTo: 'user',
+      redirectTo: 'user/signin',
       pathMatch: 'full',
     },
     {
-      path: '',
-      loadChildren: () => import('../user-module/user-module.module').then(module => module.UserModule)
+      path: 'user',
+      children: userRoutes
     },
     {
-      path: '',
+      path: 'admin',
       loadChildren: () => import('../admin-module/admin-module.module').then(module => module.AdminModuleModule)
     }
 

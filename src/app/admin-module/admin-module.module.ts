@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdminRoutingModule } from './admin.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from "ngx-spinner";
-import { CookieService } from 'ngx-cookie-service';
 
 
 import { LoginComponent } from './admin-view-components/login/login.component';
@@ -18,11 +17,13 @@ import { AddGetAlgorithmComponent } from './admin-view-components/add-get-algori
 import { AddGetDomainComponent } from './admin-view-components/add-get-domain/add-get-domain.component';
 import { AlgorithmService } from './services/algorithm/algorithm.service';
 import { ModelInfoService } from './services/model-info/model-info.service';
+import { AdminNavComponent } from './admin-view-components/admin-nav/admin-nav.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [LoginComponent, HomeComponent, AddModelInfoComponent, AddQuestionComponent, AddGetAlgorithmComponent, AddGetDomainComponent],
+  declarations: [LoginComponent, HomeComponent, AddModelInfoComponent, AddQuestionComponent, AddGetAlgorithmComponent, AddGetDomainComponent, AdminNavComponent],
   imports: [
-    CookieService,
+    NgbModule,
     NgxSpinnerModule,
     HttpClientModule,
     AgGridModule.withComponents(null),

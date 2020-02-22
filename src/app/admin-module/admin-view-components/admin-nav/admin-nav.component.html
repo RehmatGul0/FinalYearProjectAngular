@@ -1,0 +1,25 @@
+ <nav class="navbar navbar-expand-md navbar-light bg-light mb-3">
+  <a class="navbar-brand" >Machine Learning based Query Resolution
+System for Diverse Data sets</a> 
+  <button class="navbar-toggler" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
+    &#9776;
+  </button>
+  <!-- Step 2: Add the ngbCollapse directive to the element below. -->
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item " >
+        <a class="nav-link" routerLink="../question">Question</a>
+      </li>
+      <li class="nav-item " >
+        <a class="nav-link" routerLink="../domain">Domain</a>
+      </li>
+      <li class="nav-item " >
+        <a class="nav-link" routerLink="../algorithm">Algorithm</a>
+      </li>
+      <li class="nav-item " >
+        <a class="nav-link" routerLink="../modelInfo">Model Info</a>
+      </li>
+    </ul>
+  </div>
+  
+</nav>

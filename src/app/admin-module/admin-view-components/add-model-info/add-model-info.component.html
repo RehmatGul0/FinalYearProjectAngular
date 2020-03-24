@@ -8,8 +8,11 @@
       <div class="form-group row">
         <label for="modelFile" class="col-sm-3 col-form-label">Model File</label>
         <div class="col-sm-9">
-          <input id="modelFile" class="form-control-plaintext" formControlName="modelFile" class="form-control"
-            placeholder="Enter your model file name.." type="text">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="modelFile" formControlName="modelFile"
+              (change)="handleModelFileInput($event.target.files)">
+            <label class="custom-file-label" for="dataFile">{{modelFileText}}</label>
+          </div>
         </div>
       </div>
       <div class="form-group row">
@@ -17,7 +20,7 @@
         <div class="col-sm-9">
           <div class="custom-file">
             <input type="file" class="custom-file-input" id="dataFile" formControlName="dataFile"
-              (change)="handleFileInput($event.target.files)">
+              (change)="handleDataFileInput($event.target.files)">
             <label class="custom-file-label" for="dataFile">{{dataFileText}}</label>
           </div>
         </div>

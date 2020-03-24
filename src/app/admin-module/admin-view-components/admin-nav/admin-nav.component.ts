@@ -12,7 +12,4 @@ export class AdminNavComponent implements OnInit {
 
   ngOnInit() {
   }
-  modelInfo(){
-    this.router.navigate(['admin/domain'])
-  }
 }

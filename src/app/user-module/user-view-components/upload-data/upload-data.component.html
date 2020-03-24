@@ -1,8 +1,55 @@
-<div class="container">
-  <div class="form-group">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="customFile" (change)="handleFileInput($event.target.files)">
-      <label class="custom-file-label" for="customFile">{{selectFileText}}</label>
-    </div>
-  </div>
+<app-user-nav></app-user-nav>
+<div class="card container">
+  <article class="card-body">
+    <h4 class="card-title text-center">Add Data File</h4>
+    <form [formGroup]="uploadDataForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="dataFile" class="col-sm-2 col-form-label">Data File</label>
+        <div class="col-sm-10">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="dataFile" formControlName="dataFile"
+              (change)="handleFileInput($event.target.files)">
+            <label class="custom-file-label" for="dataFile">{{selectFileText}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="question" class="col-sm-2 col-form-label">Question</label>
+        <div class="col-sm-10">
+          <select class="custom-select" id="question" formControlName="question" (change)="getFeatures()">
+            <option value="" selected>Select question</option>
+            <option *ngFor="let question of questions" value={{question._id}}> {{question._question}}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div *ngIf="originalFeatures">
+        <div class="form-group">
+          <div formArrayName="features" *ngFor="let feature of originalFeatures let i = index;">
+            <div [formGroupName]="i">
+              <div class="row">
+                <div class="col-2">
+                  {{feature}}
+                </div>
+                <div class="col-10">
+                  <div class="form-group">
+                    <select class="custom-select" id="i" formControlName="feature">
+                      <option value="" selected>Click to select feature mapping</option>
+                      <option *ngFor="let _feature of fileColumns" value={{_feature}}> {{_feature}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="form-group col-sm-10 offset-2">
+          <button type="submit" class="btn btn-primary btn-block"> Add </button>
+        </div> <!-- form-group// -->
+      </div>
+    </form>
+  </article>
 </div>

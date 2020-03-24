@@ -54,6 +54,7 @@ export class AddGetDomainComponent implements OnInit {
       this.domainService.addDomain(domain)
       .subscribe((result:response<String>)=>{
         this.spinner.hide();
+        window.location.reload();
         console.log('success');
       },
       (error:response<String>)=>{

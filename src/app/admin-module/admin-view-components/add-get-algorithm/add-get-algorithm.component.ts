@@ -27,6 +27,9 @@ import {
 export class AddGetAlgorithmComponent implements OnInit {
   rowData: any[];
   submitted: Boolean = false;
+  dataFileSelected:File;
+  dataFileText:String;
+
   constructor(private fb: FormBuilder, private algorithmService: AlgorithmService,private spinner: NgxSpinnerService) {}
 
   ngOnInit() {
@@ -38,7 +41,9 @@ export class AddGetAlgorithmComponent implements OnInit {
       })
   }
   algorithmForm: FormGroup = this.fb.group({
-    algorithmName: ['', Validators.compose([Validators.required])]
+    algorithmName: ['', Validators.compose([Validators.required])],
+    algorithmFile: [null, Validators.compose([Validators.required])]
+
   });
   columnDefs = [{
       headerName: 'ID',
@@ -55,23 +60,30 @@ export class AddGetAlgorithmComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     if (!this.algorithmForm.invalid) {
-      this.spinner.show();
-      let algorithm: AddAlgorithm = {
-        algorithmName: this.algorithmName.value
-      };
-      this.algorithmService.addAlgorithm(algorithm)
-        .subscribe((result: response < String > ) => {
-          this.spinner.hide();
-          console.log('success');
-          },
-          (error: response < String > ) => {
-            this.spinner.hide();
-            console.log(error);
-          });
+      let formData = new FormData();
+      formData.append('algorithmFile',this.dataFileSelected,this.dataFileSelected.name);
+      formData.append('name', this.algorithmName.value);
+      
+      this.algorithmService.addAlgorithm(formData)
+      .subscribe((result: response < String > ) => {
+        this.spinner.hide();
+        window.location.reload();
+        console.log('success');
+      },
+      (error: response < String > ) => {
+        this.spinner.hide();
+        console.log(error);
+      });
     }
   }
   onGridReady(params) {
     params.api.sizeColumnsToFit();
+  }
+  handleDataFileInput(file: FileList) {
+    if (file) {
+      this.dataFileSelected = file.item(0)
+      this.dataFileText = file.item(0).name;
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-<app-submit-data (fileSelected)="fileSelected($event)"></app-submit-data>
+<app-user-nav></app-user-nav>
 <ngx-spinner></ngx-spinner>
 <div class="container">
   <div class="card">
@@ -10,10 +10,20 @@
         <div class="card-body">
           <h6 class="card-title">Question no :{{i+1}}</h6>
           <p class="card-text">{{question._question}}</p>
-          <p class="card-text">These features Should be present : {{question._features}}</p>
-          <button type="submit" class="btn btn-sm btn-primary" (click)="uploadData()">Get Answer</button>
-          <div *ngIf="!isFileSelected && uploadDataClicked" class="invalid-feedback d-block">
-            <span>Please select the data file first..</span>
+          <div class="row">
+            <div class="col-6">
+              <select class="custom-select" id="dataFile"  [(ngModel)]="dataFileId">
+                <option  selected>Click to select feature mapping</option>
+                <option *ngFor="let data of question.userData" value={{data._id}}> {{data.file}}
+                </option>
+              </select>
+            </div>
+            <div class="col-6">
+              <button type="submit" class="btn btn-sm btn-primary" (click)="uploadData()">Get Answer</button>
+              <div *ngIf="!isFileSelected && uploadDataClicked" class="invalid-feedback d-block">
+                <span>Please select the data file first..</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

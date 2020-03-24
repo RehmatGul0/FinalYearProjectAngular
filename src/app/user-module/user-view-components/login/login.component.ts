@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.authService.signin(_signIn)
       .subscribe((result: response<SignIn>) => {
         console.log(result)
-        sessionStorage.setItem('admin_token',result.result.token)
+        sessionStorage.setItem('user_token',result.result.token)
         this.spinner.hide();
         this.router.navigate(['user/home'])
         console.log('success');

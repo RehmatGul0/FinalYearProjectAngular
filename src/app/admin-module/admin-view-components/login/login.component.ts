@@ -34,8 +34,7 @@ export class LoginComponent implements OnInit {
       this.spinner.show();
       this.authService.signin(_signIn)
       .subscribe((result: response<SignIn>) => {
-        console.log(result)
-        sessionStorage.setItem('user_token',result.result.token)
+        sessionStorage.setItem('admin_token',result.result.token)
         this.spinner.hide();
         this.router.navigate(['admin/domain'])
         console.log('success');

@@ -17,6 +17,8 @@ export class AddQuestionComponent implements OnInit {
   submitted: boolean = false;
   domains: any[] ;
   models: any[] ;
+  dataFileText: String = "Please select your answer file"
+  fileSelected:File;
   constructor(private fb: FormBuilder , private domainService :DomainService ,private spinner: NgxSpinnerService,
     private modelInfoService : ModelInfoService , private questionService : QuestionService) { }
   ngOnInit() {
@@ -26,21 +28,20 @@ export class AddQuestionComponent implements OnInit {
     })
     this.modelInfoService.getModelInfo()
     .subscribe((results:response<GetDomain[]>)=>{
-      console.log(results)
       this.models = results.result.map((result,index)=> Object.assign(result, {index: index+1}));
     })
   }
   questionForm: FormGroup = this.fb.group({
     question: ['', Validators.compose([Validators.required])],
-    answerPath: ['', Validators.compose([Validators.required])],
+    answerFile: ['', Validators.compose([Validators.required])],
     domain: ['', Validators.compose([Validators.required])],
     modelInfo: ['', Validators.compose([Validators.required])]
   });
   get question(){
     return this.questionForm.get('question');
   }
-  get answerPath(){
-    return this.questionForm.get('answerPath');
+  get answerFile(){
+    return this.questionForm.get('answerFile');
   }
   get domainId(){
     return this.questionForm.get('domain');
@@ -53,14 +54,12 @@ export class AddQuestionComponent implements OnInit {
     console.log(this.questionForm.invalid)
     if(!this.questionForm.invalid){
       this.spinner.show();
-      let question :AddQuestion ={
-        question : this.question.value,
-        answerPath : this.answerPath.value,
-        domainId : this.domains.find(domain=> domain.index == this.domainId.value)._id,
-        modelInfoId : this.models.find(modelInfo=> modelInfo.index == this.modelInfoId.value)._id ,
-      } 
-      
-      this.questionService.AddQuestion(question)
+      let formData = new FormData();
+      formData.append('answerFile',this.fileSelected,this.fileSelected.name);
+      formData.append('question',this.question.value);
+      formData.append('domainId',this.domains.find(domain=> domain.index == this.domainId.value)._id);
+      formData.append('modelInfoId',this.models.find(modelInfo=> modelInfo.index == this.modelInfoId.value)._id);
+      this.questionService.AddQuestion(formData)
       .subscribe((result: response < String > ) => {
         this.spinner.hide();
         console.log('success');
@@ -69,6 +68,12 @@ export class AddQuestionComponent implements OnInit {
         this.spinner.hide();
         console.log(error);
       });
+    }
+  }
+  handleFileInput(file: FileList) {
+    if (file ) {
+      this.fileSelected = file.item(0)
+      this.dataFileText = file.item(0).name;
     }
   }
 

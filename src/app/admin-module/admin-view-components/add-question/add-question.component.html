@@ -13,10 +13,13 @@
         </div>
       </div>
       <div class="form-group row">
-        <label for="answer" class="col-sm-3 col-form-label">Answer Path</label>
+        <label for="answerFile" class="col-sm-3 col-form-label">Answer File</label>
         <div class="col-sm-9">
-          <input id="answer" class="form-control-plaintext" formControlName="answerPath" class="form-control"
-            placeholder="Enter your question here" type="text">
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="answerFile" formControlName="answerFile"
+              (change)="handleFileInput($event.target.files)">
+            <label class="custom-file-label" for="answerFile">{{dataFileText}}</label>
+          </div>
         </div>
       </div>
       

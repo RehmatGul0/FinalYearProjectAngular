@@ -28,7 +28,9 @@ export class AddModelInfoComponent implements OnInit {
   submitted: boolean = false;
   algos: any[] ;
   dataFileText: String = "Please select your data file"
-  fileSelected:File;
+  modelFileText: String = "Please select your model file"
+  dataFileSelected:File;
+  modelFileSelected:File;
   ngOnInit() {
     this.algorithmService.getAlgorithm()
     .subscribe((results:response<GetAlgorithm[]>)=>{
@@ -74,8 +76,8 @@ export class AddModelInfoComponent implements OnInit {
     if(!this.modelInfoForm.invalid){
       this.spinner.show();
       let formData = new FormData();
-      formData.append('dataFile',this.fileSelected,this.fileSelected.name);
-      formData.append('modelFilePath',this.modelFile.value);
+      formData.append('dataFile',this.dataFileSelected,this.dataFileSelected.name);
+      formData.append('modelFile',this.modelFileSelected,this.modelFileSelected.name);
       formData.append('algorithmId',this.algos.find(algorithm=> algorithm.index == this.algorithm.value)._id);
       formData.append('features',JSON.stringify(this.featureList.value.map(feature=>feature.feature)));
       
@@ -90,10 +92,16 @@ export class AddModelInfoComponent implements OnInit {
       });
     }
   }
-  handleFileInput(file: FileList) {
+  handleDataFileInput(file: FileList) {
     if (file) {
-      this.fileSelected = file.item(0)
+      this.dataFileSelected = file.item(0)
       this.dataFileText = file.item(0).name;
+    }
+  }
+  handleModelFileInput(file: FileList) {
+    if (file) {
+      this.modelFileSelected = file.item(0)
+      this.modelFileText = file.item(0).name;
     }
   }
 

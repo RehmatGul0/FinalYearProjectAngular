@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
   questions: any[];
   home: any[];
   userData : any[];
-  dataFileId:String="Click to select feature mapping";
+  dataFileId:String="Click to select data set";
 
   ngOnInit() {
     this.domainService.getDomain().subscribe((results: response < GetDomain[] > ) => {

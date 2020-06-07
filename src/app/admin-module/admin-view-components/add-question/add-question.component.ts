@@ -7,6 +7,8 @@ import { ModelInfoService } from '../../services/model-info/model-info.service';
 import {
   NgxSpinnerService
 } from 'ngx-spinner';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-add-question',
@@ -19,6 +21,9 @@ export class AddQuestionComponent implements OnInit {
   models: any[] ;
   dataFileText: String = "Please select your answer file"
   fileSelected:File;
+  alert = new Subject < string > ();
+  alertMessage:String = '';
+  alertType:String='success';
   constructor(private fb: FormBuilder , private domainService :DomainService ,private spinner: NgxSpinnerService,
     private modelInfoService : ModelInfoService , private questionService : QuestionService) { }
   ngOnInit() {
@@ -30,6 +35,7 @@ export class AddQuestionComponent implements OnInit {
     .subscribe((results:response<GetDomain[]>)=>{
       this.models = results.result.map((result,index)=> Object.assign(result, {index: index+1}));
     })
+    this.initAlert();
   }
   questionForm: FormGroup = this.fb.group({
     question: ['', Validators.compose([Validators.required])],
@@ -51,7 +57,6 @@ export class AddQuestionComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
-    console.log(this.questionForm.invalid)
     if(!this.questionForm.invalid){
       this.spinner.show();
       let formData = new FormData();
@@ -62,11 +67,11 @@ export class AddQuestionComponent implements OnInit {
       this.questionService.AddQuestion(formData)
       .subscribe((result: response < String > ) => {
         this.spinner.hide();
-        console.log('success');
+        this.successAlert();
       },
       (error: response < String > ) => {
         this.spinner.hide();
-        console.log(error);
+        this.dangerAlert();
       });
     }
   }
@@ -76,5 +81,21 @@ export class AddQuestionComponent implements OnInit {
       this.dataFileText = file.item(0).name;
     }
   }
+  initAlert() {
+    this.alert.subscribe(message => this.alertMessage = message);
+    this.alert.pipe(
+      debounceTime(4000)
+    ).subscribe(() => this.alertMessage = '');
+  }
+  successAlert() {
+    this.alertType='success';
+    this.alert.next('Question Successfully added');
+    
+  }
+  dangerAlert() {
+    this.alertType='danger';
+    this.alert.next('There was an error while performing this action');
+  }
+
 
 }

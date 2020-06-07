@@ -2,6 +2,9 @@
 <div class="card container">
   <article class="card-body">
     <h4 class="card-title text-center">Add Data File</h4>
+    <hr>
+    <ngb-alert *ngIf="alertMessage" [type]="alertType" class="mb-3 mt-3" (close)="alertMessage = ''">{{ alertMessage }}
+    </ngb-alert>
     <form [formGroup]="uploadDataForm" (ngSubmit)="onSubmit()">
       <div class="form-group row">
         <label for="dataFile" class="col-sm-2 col-form-label">Data File</label>

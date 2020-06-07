@@ -18,6 +18,10 @@ export const routes: Routes = [
     {
       path: 'admin',
       loadChildren: () => import('../admin-module/admin-module.module').then(module => module.AdminModuleModule)
+    },
+    {
+      path: '**',
+      redirectTo: 'user/signin'
     }
 
 ];

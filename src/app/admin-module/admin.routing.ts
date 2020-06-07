@@ -37,6 +37,10 @@ const routes: Routes = [
     path: 'domain',
     component: AddGetDomainComponent
   },
+  {
+    path: '**',
+    redirectTo: 'domain'
+  }
   
 ];
 

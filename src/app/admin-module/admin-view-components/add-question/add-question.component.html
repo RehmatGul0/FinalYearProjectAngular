@@ -4,6 +4,8 @@
   <article class="card-body">
     <h4 class="card-title text-center">Add Question</h4>
     <hr>
+    <ngb-alert *ngIf="alertMessage" [type]="alertType" class="mb-3 mt-3" (close)="alertMessage = ''">{{ alertMessage }}
+    </ngb-alert>
     <form [formGroup]="questionForm">
       <div class="form-group row">
         <label for="question" class="col-sm-3 col-form-label">Question</label>
@@ -22,7 +24,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="form-group row">
         <label for="domain" class="col-sm-3 col-form-label">Domain</label>
         <div class="col-sm-9">
@@ -44,7 +46,7 @@
           </select>
         </div>
       </div> <!-- form-group// -->
-      
+
       <div class="row">
         <div class="form-group col-sm-9 offset-3">
           <button (click)="onSubmit()" type="submit" class="btn btn-primary btn-block"> Submit </button>
